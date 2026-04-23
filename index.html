@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ivan Morales Andreevich Subich</title>
+<script>
+  // Force HTTPS
+  if (location.protocol === 'http:') {
+    location.replace('https:' + location.href.slice(5));
+  }
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --red: #e01111; --red-dark: #8b0000; --red-glow: rgba(224,17,17,0.35);
+    --black: #090909; --surface: #111111; --surface2: #181818;
+    --white: #f0ede8; --muted: #888;
+    --font-display: 'Anton', sans-serif; --font-head: 'Bebas Neue', sans-serif;
+    --font-body: 'Rajdhani', sans-serif;
+  }
+  html { scroll-behavior: smooth; }
+  body { background:var(--black); color:var(--white); font-family:var(--font-body); font-size:17px; line-height:1.5; overflow-x:hidden; cursor:crosshair; }
+  body::before {
+    content:''; position:fixed; inset:0;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events:none; z-index:9999; opacity:.4;
+  }
+
+  /* HERO */
+  #hero { min-height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:flex-start; padding:80px 6vw 60px; position:relative; overflow:hidden; }
+  #hero::after { content:''; position:absolute; right:-120px; top:-80px; width:600px; height:600px; background:radial-gradient(circle, var(--red-glow) 0%, transparent 70%); pointer-events:none; animation:pulse 6s ease-in-out infinite; }
+  @keyframes pulse { 0%,100%{transform:scale(1);opacity:.6} 50%{transform:scale(1.12);opacity:1} }
+  .hero-label { font-family:var(--font-body); font-weight:700; font-size:13px; letter-spacing:6px; text-transform:uppercase; color:var(--red); margin-bottom:18px; opacity:0; transform:translateY(30px); animation:rise .7s ease forwards .1s; }
+  .hero-name { font-family:var(--font-display); font-size:clamp(52px,9vw,130px); line-height:.92; letter-spacing:-1px; text-transform:uppercase; color:var(--white); margin-bottom:10px; opacity:0; transform:translateY(40px); animation:rise .8s ease forwards .25s; }
+  .hero-name span { color:var(--red); }
+  .hero-tagline { font-family:var(--font-body); font-size:clamp(16px,2vw,22px); font-weight:300; color:var(--muted); letter-spacing:2px; margin-top:18px; opacity:0; transform:translateY(30px); animation:rise .7s ease forwards .45s; }
+  .hero-line { position:absolute; bottom:0; left:6vw; right:6vw; height:1px; background:linear-gradient(90deg,var(--red),transparent); }
+  .scroll-hint { position:absolute; bottom:36px; right:6vw; font-family:var(--font-body); font-size:12px; letter-spacing:4px; color:var(--muted); writing-mode:vertical-rl; animation:fadeIn 1.5s ease forwards 1.5s; opacity:0; }
+  @keyframes rise { to { opacity:1; transform:translateY(0); } }
+  @keyframes fadeIn { to { opacity:1; } }
+
+  /* SECTIONS */
+  .section { padding:80px 6vw; position:relative; }
+  .section-label { font-family:var(--font-body); font-weight:700; font-size:11px; letter-spacing:7px; text-transform:uppercase; color:var(--red); margin-bottom:10px; }
+  .section-title { font-family:var(--font-head); font-size:clamp(36px,6vw,72px); line-height:1; letter-spacing:2px; margin-bottom:48px; color:var(--white); }
+  .divider { height:1px; background:linear-gradient(90deg,transparent,var(--red),transparent); margin:0 6vw; }
+
+  /* REVEAL */
+  .reveal { opacity:0; transition:opacity .6s ease; }
+  .reveal.visible { opacity:1; }
+
+  /* ABOUT */
+  .about-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:2px; }
+  .stat-card { background:var(--surface); padding:32px 28px; border-top:2px solid var(--red); position:relative; overflow:hidden; transition:background .3s; }
+  .stat-card::before { content:''; position:absolute; inset:0; background:linear-gradient(135deg,var(--red-glow) 0%,transparent 60%); opacity:0; transition:opacity .3s; }
+  .stat-card:hover { background:var(--surface2); }
+  .stat-card:hover::before { opacity:1; }
+  .stat-label { font-size:11px; letter-spacing:5px; text-transform:uppercase; color:var(--muted); margin-bottom:8px; font-weight:600; }
+  .stat-value { font-family:var(--font-head); font-size:clamp(28px,4vw,48px); color:var(--white); letter-spacing:1px; }
+  .stat-sub { font-size:13px; color:var(--red); margin-top:4px; font-weight:600; letter-spacing:1px; }
+  .lang-row { display:flex; flex-wrap:wrap; gap:12px; margin-top:8px; }
+  .lang-pill { padding:8px 22px; border:1px solid var(--red); color:var(--white); font-family:var(--font-body); font-size:15px; font-weight:600; letter-spacing:2px; text-transform:uppercase; transition:background .25s,color .25s; cursor:default; }
+  .lang-pill:hover { background:var(--red); color:#fff; }
+
+  /* GENRE TAGS */
+  .tag-cloud { display:flex; flex-wrap:wrap; gap:10px; }
+  .genre-tag { padding:8px 18px; background:var(--red-dark); color:var(--white); font-size:13px; font-weight:700; letter-spacing:3px; text-transform:uppercase; clip-path:polygon(0 0,calc(100% - 12px) 0,100% 100%,0 100%); transition:background .25s; cursor:default; }
+  .genre-tag:hover { background:var(--red); }
+
+  /* MEDIA CARDS */
+  .card-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:2px; }
+  .media-card { position:relative; overflow:hidden; aspect-ratio:4/3; background:var(--surface2); display:block; text-decoration:none; cursor:pointer; }
+  .media-card img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .5s ease, filter .4s ease; filter:grayscale(30%) brightness(0.8); }
+  .media-card:hover img { transform:scale(1.07); filter:grayscale(0%) brightness(1); }
+  .media-card-overlay { position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,.88) 0%, transparent 55%); display:flex; flex-direction:column; justify-content:flex-end; padding:20px 18px; }
+  .media-card-title { font-family:var(--font-head); font-size:clamp(22px,3vw,32px); letter-spacing:2px; color:var(--white); line-height:1; }
+  .media-card-sub { font-size:11px; letter-spacing:4px; text-transform:uppercase; color:var(--red); margin-bottom:5px; font-weight:700; }
+  .media-card-bar { position:absolute; top:0; left:0; right:0; height:3px; background:var(--red); transform:scaleX(0); transform-origin:left; transition:transform .4s ease; }
+  .media-card:hover .media-card-bar { transform:scaleX(1); }
+  .media-card-link-icon { position:absolute; top:12px; right:12px; width:30px; height:30px; background:rgba(0,0,0,.6); border:1px solid rgba(255,255,255,.2); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; opacity:0; transform:translateY(-4px); transition:opacity .25s, transform .25s; }
+  .media-card:hover .media-card-link-icon { opacity:1; transform:translateY(0); }
+
+  /* SOCIAL */
+  .social-row { display:flex; flex-wrap:wrap; gap:20px; }
+  .social-card { display:flex; align-items:center; gap:16px; background:var(--surface); padding:18px 28px 18px 18px; border-top:2px solid var(--red); text-decoration:none; color:var(--white); transition:background .25s, transform .2s; min-width:220px; }
+  .social-card:hover { background:var(--surface2); transform:translateY(-4px); }
+  .social-pfp { width:54px; height:54px; border-radius:50%; background:var(--surface2); border:2px solid var(--red); display:flex; align-items:center; justify-content:center; font-size:22px; overflow:hidden; position:relative; flex-shrink:0; }
+  .social-pfp img { width:100%; height:100%; object-fit:cover; position:absolute; inset:0; border-radius:50%; }
+  .social-platform { font-size:10px; letter-spacing:5px; text-transform:uppercase; color:var(--red); font-weight:700; }
+  .social-handle { font-family:var(--font-body); font-size:16px; font-weight:700; letter-spacing:1px; word-break:break-all; }
+  .social-sub { font-size:11px; color:var(--muted); margin-top:2px; letter-spacing:1px; }
+  .discord-card { border-top-color:#5865F2 !important; }
+  .discord-card .social-platform { color:#5865F2; }
+  .discord-card .social-pfp { border-color:#5865F2; background:#23272a; }
+  .fb-card { border-top-color:#1877F2 !important; }
+  .fb-card .social-platform { color:#1877F2; }
+  .fb-card .social-pfp { border-color:#1877F2; }
+  .steam-card { border-top-color:#66c0f4 !important; background:#0e1620; }
+  .steam-card:hover { background:#162230; }
+  .steam-card .social-platform { color:#66c0f4; }
+  .steam-card .social-pfp { border-color:#66c0f4; background:#1b2838; }
+
+  /* CURSOR */
+  .cursor-dot { position:fixed; width:8px; height:8px; border-radius:50%; background:var(--red); pointer-events:none; z-index:10000; transform:translate(-50%,-50%); mix-blend-mode:screen; }
+
+  ::-webkit-scrollbar { width:4px; }
+  ::-webkit-scrollbar-track { background:#0d0d0d; }
+  ::-webkit-scrollbar-thumb { background:var(--red); }
+
+  /* FOOTER */
+  footer { padding:50px 6vw 40px; border-top:1px solid #222; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:20px; }
+  footer .logo { font-family:var(--font-head); font-size:28px; letter-spacing:4px; color:var(--red); }
+  footer .copy { font-size:12px; letter-spacing:3px; color:var(--muted); text-transform:uppercase; }
+
+  @media(max-width:600px) {
+    .hero-name { font-size:clamp(44px,13vw,80px); }
+    .social-card { min-width:100%; flex:1 1 100%; }
+    .card-grid { grid-template-columns:1fr 1fr; }
+  }
+  @media(max-width:380px) { .card-grid { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+
+<div class="cursor-dot" id="dot"></div>
+
+<!-- ══ HERO ══ -->
+<section id="hero">
+  <div class="hero-label">Personal Portfolio</div>
+  <h1 class="hero-name">Ivan<br><span>Morales</span><br></h1>
+  <p class="hero-tagline">Russian · Filipino · 16 · Metal Head · Site-making · Guitar · Piano · Reading · Snoopy · Cat-lover · 💙K🤍</p>
+  <div class="hero-line"></div>
+  <div class="scroll-hint">SCROLL DOWN</div>
+</section>
+
+<!-- ══ ABOUT ══ -->
+<section class="section">
+  <div class="section-label reveal">Who I Am</div>
+  <div class="section-title reveal">About Me</div>
+  <div class="about-grid">
+    <div class="stat-card reveal">
+      <div class="stat-label">Full Name</div>
+      <div class="stat-value" style="font-size:clamp(18px,2.5vw,26px);line-height:1.2;">Ivan Morales<br></div>
+    </div>
+    <div class="stat-card reveal">
+      <div class="stat-label">Age</div>
+      <div class="stat-value">16</div>
+      <div class="stat-sub">Years Old</div>
+    </div>
+    <div class="stat-card reveal">
+      <div class="stat-label">Nationality</div>
+      <div class="stat-value" style="font-size:clamp(20px,2.8vw,36px);line-height:1.2;">½ Russian<br>½ Filipino</div>
+    </div>
+    <div class="stat-card reveal">
+      <div class="stat-label">Height</div>
+      <div class="stat-value">5'11"</div>
+      <div class="stat-sub">180 cm</div>
+    </div>
+    <div class="stat-card reveal">
+      <div class="stat-label">Favorite Color</div>
+      <div style="display:flex;align-items:center;gap:14px;margin-top:8px;">
+        <div style="width:48px;height:48px;background:var(--red);box-shadow:0 0 20px var(--red-glow);flex-shrink:0;"></div>
+        <div class="stat-value" style="font-size:clamp(22px,3vw,40px);">RED</div>
+      </div>
+    </div>
+    <div class="stat-card reveal">
+      <div class="stat-label">Languages</div>
+      <div class="lang-row" style="margin-top:12px;">
+        <div class="lang-pill"><img src="https://flagcdn.com/24x18/ru.png" alt="Russia" style="width:20px;height:15px;object-fit:cover;vertical-align:middle;margin-right:7px;border-radius:2px;"> Russian</div>
+        <div class="lang-pill"><img src="https://flagcdn.com/24x18/gb.png" alt="USA" style="width:20px;height:15px;object-fit:cover;vertical-align:middle;margin-right:7px;border-radius:2px;"> English</div>
+        <div class="lang-pill"><img src="https://flagcdn.com/24x18/ph.png" alt="Philippines" style="width:20px;height:15px;object-fit:cover;vertical-align:middle;margin-right:7px;border-radius:2px;"> Tagalog</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══ MUSIC ══ -->
+<section class="section">
+  <div class="section-label reveal">What I Listen To</div>
+  <div class="section-title reveal">Music</div>
+
+  <div class="section-label reveal" style="margin-bottom:16px;font-size:13px;">Genres</div>
+  <div class="tag-cloud reveal" style="margin-bottom:52px;">
+    <div class="genre-tag">Metal</div>
+    <div class="genre-tag">Nu Metal</div>
+    <div class="genre-tag">Heavy Metal</div>
+    <div class="genre-tag">Thrash Metal</div>
+    <div class="genre-tag">Rock</div>
+    <div class="genre-tag">Emo</div>
+    <div class="genre-tag">Alternative</div>
+    <div class="genre-tag">Grunge</div>
+    <div class="genre-tag">Industrial Metal</div>
+  </div>
+
+  <div class="section-label reveal" style="margin-bottom:20px;font-size:13px;">Favorite Bands</div>
+  <div class="card-grid reveal">
+
+    <a class="media-card" href="https://open.spotify.com/artist/2ye2Wgw4gimLv2eAKyk1NB?si=idk38a_xS4GImtF32-2agw" target="_blank" rel="noopener">
+      <div class="media-card-bar"></div>
+      <div class="media-card-link-icon">↗</div>
+      <!-- Upload a Metallica photo to Bluehost named: metallica.jpg -->
+      <img src="metallica.jpg" alt="Metallica">
+      <div class="media-card-overlay">
+        <div class="media-card-sub">Thrash Metal · Est. 1981</div>
+        <div class="media-card-title">Metallica</div>
+      </div>
+    </a>
+
+    <a class="media-card" href="https://open.spotify.com/artist/1Yox196W7bzVNZI7RBaPnf?si=ixhOOScFT3mzmbWtPJWhdQ" target="_blank" rel="noopener">
+      <div class="media-card-bar"></div>
+      <div class="media-card-link-icon">↗</div>
+      <!-- Upload a Megadeth photo to Bluehost named: megadeth.jpg -->
+      <img src="megadeth.jpg" alt="Megadeth">
+      <div class="media-card-overlay">
+        <div class="media-card-sub">Thrash Metal · Est. 1983</div>
+        <div class="media-card-title">Megadeth</div>
+      </div>
+    </a>
+
+    <a class="media-card" href="https://open.spotify.com/artist/6XyY86QOPPrYVGvF9ch6wz?si=TWsYuz2yTXqkTpAFc56Dsg" target="_blank" rel="noopener">
+      <div class="media-card-bar"></div>
+      <div class="media-card-link-icon">↗</div>
+      <!-- Upload a Linkin Park photo to Bluehost named: linkin-park.jpg -->
+      <img src="linkin-park.jpg" alt="Linkin Park">
+      <div class="media-card-overlay">
+        <div class="media-card-sub">Nu Metal · Est. 1996</div>
+        <div class="media-card-title">Linkin Park</div>
+      </div>
+    </a>
+
+    <a class="media-card" href="https://open.spotify.com/artist/165ZgPlLkK7bf5bDoFc6Sb?si=xatwD2__RlCtWdaqrZvkrg" target="_blank" rel="noopener">
+      <div class="media-card-bar"></div>
+      <div class="media-card-link-icon">↗</div>
+      <!-- Upload a Limp Bizkit photo to Bluehost named: limp-bizkit.jpg -->
+      <img src="limp-bizkit.jpg" alt="Limp Bizkit">
+      <div class="media-card-overlay">
+        <div class="media-card-sub">Nu Metal · Est. 1994</div>
+        <div class="media-card-title">Limp Bizkit</div>
+      </div>
+    </a>
+
+    <a class="media-card" href="https://open.spotify.com/artist/4Z7oKBHMBtMOzMCKFSbNuP" target="_blank" rel="noopener">
+      <div class="media-card-bar"></div>
+      <div class="media-card-link-icon">↗</div>
+      <!-- Upload a Kino photo to Bluehost named: kino.jpg -->
+      <img src="kino.jpg" alt="Kino">
+      <div class="media-card-overlay">
+        <div class="media-card-sub">Russian Rock · Est. 1982</div>
+        <div class="media-card-title">Kino</div>
+      </div>
+    </a>
+
+    <a class="media-card" href="https://open.spotify.com/artist/6olE6TJLqED3rqDCT0FyPh" target="_blank" rel="noopener">
+      <div class="media-card-bar"></div>
+      <div class="media-card-link-icon">↗</div>
+      <!-- Upload a Nirvana photo to Bluehost named: nirvana.jpg -->
+      <img src="nirvana.jpg" alt="Nirvana">
+      <div class="media-card-overlay">
+        <div class="media-card-sub">Grunge · Est. 1987</div>
+        <div class="media-card-title">Nirvana</div>
+      </div>
+    </a>
+
+    <a class="media-card" href="https://open.spotify.com/artist/05fG473iIaoy82BF1aGhL8" target="_blank" rel="noopener">
+      <div class="media-card-bar"></div>
+      <div class="media-card-link-icon">↗</div>
+      <!-- Upload a Slipknot photo to Bluehost named: slipknot.jpg -->
+      <img src="slipknot.jpg" alt="Slipknot">
+      <div class="media-card-overlay">
+        <div class="media-card-sub">Heavy Metal · Est. 1995</div>
+        <div class="media-card-title">Slipknot</div>
+      </div>
+    </a>
+
+    <a class="media-card" href="https://open.spotify.com/artist/7FBcuc1gsnv6Y1nwFtNRCb" target="_blank" rel="noopener">
+      <div class="media-card-bar"></div>
+      <div class="media-card-link-icon">↗</div>
+      <!-- Upload a My Chemical Romance photo to Bluehost named: mcr.jpg -->
+      <img src="mcr.jpg" alt="My Chemical Romance">
+      <div class="media-card-overlay">
+        <div class="media-card-sub">Emo · Est. 2001</div>
+        <div class="media-card-title">My Chemical Romance</div>
+      </div>
+    </a>
+
+    <a class="media-card" href="https://open.spotify.com/artist/3jOstUTkEu2JkjvRdBA5Gu" target="_blank" rel="noopener">
+      <div class="media-card-bar"></div>
+      <div class="media-card-link-icon">↗</div>
+      <!-- Upload a Weezer photo to Bluehost named: weezer.jpg -->
+      <img src="weezer.jpg" alt="Weezer">
+      <div class="media-card-overlay">
+        <div class="media-card-sub">Alternative Rock · Est. 1992</div>
+        <div class="media-card-title">Weezer</div>
+      </div>
+    </a>
+
+    <a class="media-card" href="https://open.spotify.com/artist/6wWVKhxIU2cEi0K81v7HvP" target="_blank" rel="noopener">
+      <div class="media-card-bar"></div>
+      <div class="media-card-link-icon">↗</div>
+      <!-- Upload a Rammstein photo to Bluehost named: rammstein.jpg -->
+      <img src="rammstein.jpg" alt="Rammstein">
+      <div class="media-card-overlay">
+        <div class="media-card-sub">Industrial Metal · Est. 1994</div>
+        <div class="media-card-title">Rammstein</div>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══ GAMES ══ -->
+<section class="section">
+  <div class="section-label reveal">What I Play</div>
+  <div class="section-title reveal">Games</div>
+  <div class="card-grid reveal">
+
+    <a class="media-card" href="https://www.roblox.com/" target="_blank" rel="noopener">
+      <div class="media-card-bar"></div>
+      <div class="media-card-link-icon">↗</div>
+      <!-- Upload a Roblox image to Bluehost named: roblox.jpg -->
+      <img src="roblox.jpg" alt="Roblox">
+      <div class="media-card-overlay">
+        <div class="media-card-sub">Sandbox · 2006</div>
+        <div class="media-card-title">Roblox</div>
+      </div>
+    </a>
+
+    <a class="media-card" href="https://www.minecraft.net/" target="_blank" rel="noopener">
+      <div class="media-card-bar"></div>
+      <div class="media-card-link-icon">↗</div>
+      <!-- Upload a Minecraft image to Bluehost named: minecraft.jpg -->
+      <img src="minecraft.jpg" alt="Minecraft">
+      <div class="media-card-overlay">
+        <div class="media-card-sub">Survival Sandbox · 2011</div>
+        <div class="media-card-title">Minecraft</div>
+      </div>
+    </a>
+
+    <a class="media-card" href="https://www.teamfortress.com/" target="_blank" rel="noopener">
+      <div class="media-card-bar"></div>
+      <div class="media-card-link-icon">↗</div>
+      <!-- Upload a TF2 image to Bluehost named: tf2.jpg -->
+      <img src="tf2.jpg" alt="Team Fortress 2">
+      <div class="media-card-overlay">
+        <div class="media-card-sub">FPS · 2007</div>
+        <div class="media-card-title">Team Fortress 2</div>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══ SOCIALS ══ -->
+<section class="section">
+  <div class="section-label reveal">Find Me Online</div>
+  <div class="section-title reveal">Socials</div>
+
+  <div class="social-row">
+
+    <!-- Instagram -->
+    <a class="social-card reveal"
+       href="https://www.instagram.com/baconeggcheesesandwichandpepsi"
+       target="_blank" rel="noopener">
+      <div class="social-pfp">
+        <img
+          src="ig-pfp.jpg"
+          alt="Instagram PFP"
+          onerror="this.style.display='none';">
+        <span style="font-size:24px;"></span>
+      </div>
+      <div>
+        <div class="social-platform">Instagram</div>
+        <div class="social-handle">@baconeggcheesesandwichandpepsi</div>
+        <div class="social-sub">instagram.com ↗</div>
+      </div>
+    </a>
+
+    <!-- TikTok -->
+    <a class="social-card reveal"
+       href="https://www.tiktok.com/@_ivansandwich"
+       target="_blank" rel="noopener">
+      <div class="social-pfp">
+        <img
+          src="tt-pfp.jpg"
+          alt="TikTok PFP"
+          onerror="this.style.display='none';">
+        <span style="font-size:24px;">🎵</span>
+      </div>
+      <div>
+        <div class="social-platform">TikTok</div>
+        <div class="social-handle">@_ivansandwich</div>
+        <div class="social-sub">tiktok.com ↗</div>
+      </div>
+    </a>
+
+    <!-- Facebook -->
+    <a class="social-card fb-card reveal"
+       href="https://www.facebook.com/share/1B4gWsvWPA/"
+       target="_blank" rel="noopener">
+      <div class="social-pfp">
+        <img
+          src="fb-pfp.jpg"
+          alt="Facebook PFP"
+          onerror="this.style.display='none';">
+        <span style="font-size:24px;">👤</span>
+      </div>
+      <div>
+        <div class="social-platform">Facebook</div>
+        <div class="social-handle">Ivan Morales Subich</div>
+        <div class="social-sub">facebook.com ↗</div>
+      </div>
+    </a>
+
+    <!-- Discord — click to copy -->
+    <div class="social-card discord-card" id="discord-card" onclick="copyDiscord()">
+      <div class="social-pfp" style="border-color:#5865F2;background:#23272a;">
+        <img
+          src="dc-pfp.jpg"
+          alt="Discord PFP"
+          onerror="this.style.display='none';">
+        <svg width="28" height="22" viewBox="0 0 71 55" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M60.1 4.9A58.5 58.5 0 0 0 45.6.4a.2.2 0 0 0-.2.1 40.7 40.7 0 0 0-1.8 3.7 54 54 0 0 0-16.2 0A38 38 0 0 0 25.6.5a.2.2 0 0 0-.2-.1A58.3 58.3 0 0 0 11 4.9a.2.2 0 0 0-.1.1C1.6 18.7-1 32.2.3 45.5a.2.2 0 0 0 .1.2 58.8 58.8 0 0 0 17.7 9 .2.2 0 0 0 .2-.1c1.4-1.9 2.6-3.8 3.6-5.9a.2.2 0 0 0-.1-.3 38.7 38.7 0 0 1-5.5-2.6.2.2 0 0 1 0-.4c.4-.3.7-.5 1.1-.8a.2.2 0 0 1 .2 0c11.5 5.3 24 5.3 35.4 0a.2.2 0 0 1 .2 0l1 .8a.2.2 0 0 1 0 .4 36.2 36.2 0 0 1-5.5 2.6.2.2 0 0 0-.1.3c1.1 2 2.3 4 3.6 5.9a.2.2 0 0 0 .2.1 58.6 58.6 0 0 0 17.8-9 .2.2 0 0 0 .1-.2C72.5 30 69 16.6 60.2 5a.2.2 0 0 0-.1-.1zM23.7 37.3c-3.5 0-6.4-3.2-6.4-7.2s2.8-7.2 6.4-7.2c3.6 0 6.5 3.3 6.4 7.2 0 4-2.8 7.2-6.4 7.2zm23.7 0c-3.5 0-6.4-3.2-6.4-7.2s2.8-7.2 6.4-7.2c3.6 0 6.5 3.3 6.4 7.2 0 4-2.8 7.2-6.4 7.2z" fill="#5865F2"/>
+        </svg>
+      </div>
+      <div style="flex:1;">
+        <div class="social-platform" style="color:#5865F2;">Discord</div>
+        <div class="social-handle" id="dc-handle">mr._snowman</div>
+        <div class="social-sub" id="dc-hint">Click anywhere to copy</div>
+      </div>
+    </div>
+
+    <!-- Steam -->
+    <a class="social-card steam-card reveal"
+       href="YOUR_STEAM_PROFILE_URL_HERE"
+       target="_blank" rel="noopener">
+      <div class="social-pfp" style="border-color:#66c0f4;background:#1b2838;">
+        <!--
+          ════ STEAM PFP ════
+          Upload your Steam profile picture named: steam-pfp.jpg
+          to the same folder as this HTML file on Bluehost.
+          ════════════════
+        -->
+        <img src="steam-pfp.jpg" alt="Steam PFP" onerror="this.style.display='none';">
+        <svg viewBox="0 0 24 24" width="26" height="26" fill="#66c0f4" xmlns="http://www.w3.org/2000/svg">
+          <path d="M11.979 0C5.678 0 .511 4.86.022 11.037l6.432 2.658c.545-.371 1.203-.59 1.912-.59.063 0 .125.004.188.006l2.861-4.142V8.91c0-2.495 2.028-4.524 4.524-4.524 2.494 0 4.524 2.031 4.524 4.527s-2.03 4.525-4.524 4.525h-.105l-4.076 2.911c0 .052.004.105.004.159 0 1.875-1.515 3.396-3.39 3.396-1.635 0-3.016-1.173-3.331-2.727L.436 15.27C1.862 20.307 6.486 24 11.979 24c6.627 0 11.999-5.373 11.999-12S18.605 0 11.979 0zM7.54 18.21l-1.473-.61c.262.543.714.999 1.314 1.25 1.297.539 2.793-.076 3.332-1.375.263-.63.264-1.319.005-1.949s-.75-1.121-1.377-1.383c-.624-.26-1.29-.249-1.878-.03l1.523.63c.956.4 1.409 1.5 1.009 2.455-.397.957-1.497 1.41-2.454 1.012H7.54zm11.415-9.303c0-1.662-1.353-3.015-3.015-3.015-1.665 0-3.015 1.353-3.015 3.015 0 1.665 1.35 3.015 3.015 3.015 1.663 0 3.015-1.35 3.015-3.015zm-5.273-.005c0-1.252 1.013-2.266 2.265-2.266 1.249 0 2.266 1.014 2.266 2.266 0 1.251-1.017 2.265-2.266 2.265-1.252 0-2.265-1.014-2.265-2.265z"/>
+        </svg>
+      </div>
+      <div>
+        <div class="social-platform" style="color:#66c0f4;">Steam</div>
+        <div class="social-handle">
+          <!--
+            Replace the text below with your Steam username/display name
+          -->
+          Your Steam Username
+        </div>
+        <div class="social-sub">store.steampowered.com ↗</div>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<script>
+  // Cursor - use requestAnimationFrame to avoid scroll lag
+  const dot = document.getElementById('dot');
+  let mx = 0, my = 0;
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+  (function moveDot() { dot.style.left = mx + 'px'; dot.style.top = my + 'px'; requestAnimationFrame(moveDot); })();
+
+  // Scroll reveal - simple fade, no stagger delay (stagger caused the visual glitch)
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('visible');
+      io.unobserve(entry.target);
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  
+  // Discord copy
+  function copyDiscord(e) {
+    if (e) e.stopPropagation();
+    const username = 'mr._snowman';
+    const hint = document.getElementById('dc-hint');
+
+    const onCopied = () => {
+      hint.textContent = '✓ Username copied!';
+      hint.style.color = '#5865F2';
+      setTimeout(() => {
+        hint.textContent = 'Click anywhere to copy';
+        hint.style.color = '';
+      }, 2000);
+    };
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(username).then(onCopied).catch(() => {
+        legacyCopy(username); onCopied();
+      });
+    } else {
+      legacyCopy(username); onCopied();
+    }
+  }
+
+  function legacyCopy(text) {
+    const ta = document.createElement('textarea');
+    ta.value = text; ta.style.cssText = 'position:fixed;opacity:0';
+    document.body.appendChild(ta); ta.select();
+    document.execCommand('copy'); document.body.removeChild(ta);
+  }
+</script>
+</body>
+</html>
