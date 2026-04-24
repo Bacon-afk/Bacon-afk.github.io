@@ -23,30 +23,48 @@
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
     /* Styling for the small GIF next to the text */
-.inline-gif {
-  /* This size should make it visible and clear */
-  height: 48px !important; 
-  width: auto !important;
-  
-  display: inline-block;
-  margin-left: 15px;
-  vertical-align: middle;
-  
-  /* Your signature lighting effect */
-  filter: grayscale(30%) brightness(0.6); 
-  transition: all 0.4s ease;
-  
-  /* Prevents it from being "cut off" by the card edges */
+/* Allow the GIF to hang outside the card's borders */
+.tf2-card {
   position: relative;
-  z-index: 5;
+  overflow: visible !important;
 }
 
-/* Make sure the light-up effect is strong */
-.tf2-card:hover .inline-gif {
-  filter: grayscale(0%) brightness(1.3);
-  transform: scale(1.1);
+.pop-out-gif {
+  position: absolute;
+  /* Positions it on the right side */
+  right: -50px; 
+  top: 20%;
+  
+  /* Size - making it big enough to be a 'pop out' feature */
+  height: 110px !important; 
+  width: auto;
+  z-index: 99; /* Keeps it above everything else */
+  
+  /* Initial "Dark" state to match your theme */
+  filter: grayscale(50%) brightness(0.4);
+  
+  /* Smooth 'light up' and 'spring' animation */
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  pointer-events: none; /* So it doesn't block the link click */
 }
 
+/* Hover state: Lights up and pops out further */
+.tf2-card:hover .pop-out-gif {
+  filter: grayscale(0%) brightness(1.2);
+  right: -70px; /* Moves further right on hover */
+  transform: scale(1.1) rotate(8deg); /* Grows and tilts for character */
+}
+
+/* Mobile fix: Hide the pop-out or make it smaller if it hits the screen edge */
+@media(max-width: 768px) {
+  .pop-out-gif {
+    height: 70px !important;
+    right: -20px;
+  }
+  .tf2-card:hover .pop-out-gif {
+    right: -30px;
+  }
+}
 /* Optional: adjustment for the title container to keep things aligned */
 .media-card-title {
   display: flex;
@@ -388,19 +406,17 @@
     </a>
 
     <a class="media-card tf2-card" href="https://www.teamfortress.com/" target="_blank" rel="noopener">
-        <div class="media-card-bar"></div>
-        <div class="media-card-link-icon">↗</div>
-        
-        <img src="tf2.jpg" alt="Team Fortress 2">
-        
-        <div class="media-card-overlay">
-          <div class="media-card-sub">FPS · 2007</div>
-          <div class="media-card-title">
-            Team Fortress 2 
-            <img src="your-animation.gif" class="inline-gif" alt="icon">
-          </div>
-        </div>
-    </a>
+  <div class="media-card-bar"></div>
+  <div class="media-card-link-icon">↗</div>
+  <img src="tf2.jpg" alt="Team Fortress 2">
+  
+  <img src="your-animation.gif" class="pop-out-gif" alt="icon">
+
+  <div class="media-card-overlay">
+    <div class="media-card-sub">FPS · 2007</div>
+    <div class="media-card-title">Team Fortress 2</div>
+  </div>
+</a>
 
   </div>
 </section>
