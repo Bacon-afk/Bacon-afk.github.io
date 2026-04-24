@@ -22,6 +22,32 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
+    /* Styling for the small GIF next to the text */
+.inline-gif {
+  display: inline-block;
+  vertical-align: middle;
+  height: 32px; /* Adjust height to match your font size */
+  width: auto;
+  margin-left: 10px;
+  border-radius: 4px;
+  
+  /* Matches your existing card image style: starts dark/gray */
+  filter: grayscale(30%) brightness(0.8);
+  transition: filter 0.4s ease, transform 0.4s ease;
+}
+
+/* When the WHOLE card is hovered, light up the GIF */
+.tf2-card:hover .inline-gif {
+  filter: grayscale(0%) brightness(1.2); /* "Lights up" the colors */
+  transform: scale(1.1); /* Slight pop effect */
+}
+
+/* Optional: adjustment for the title container to keep things aligned */
+.media-card-title {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
   :root {
     --red: #e01111; --red-dark: #8b0000; --red-glow: rgba(224,17,17,0.35);
@@ -356,15 +382,19 @@
       </div>
     </a>
 
-    <a class="media-card" href="https://www.teamfortress.com/" target="_blank" rel="noopener">
-      <div class="media-card-bar"></div>
-      <div class="media-card-link-icon">↗</div>
-      <!-- Upload a TF2 image to tf2.jpg -->
-      <img src="tf2.jpg" alt="Team Fortress 2">
-      <div class="media-card-overlay">
-        <div class="media-card-sub">FPS · 2007</div>
-        <div class="media-card-title">Team Fortress 2</div>
-      </div>
+    <a class="media-card tf2-card" href="https://www.teamfortress.com/" target="_blank" rel="noopener">
+        <div class="media-card-bar"></div>
+        <div class="media-card-link-icon">↗</div>
+        
+        <img src="tf2.jpg" alt="Team Fortress 2">
+        
+        <div class="media-card-overlay">
+          <div class="media-card-sub">FPS · 2007</div>
+          <div class="media-card-title">
+            Team Fortress 2 
+            <img src="your-animation.gif" class="inline-gif" alt="icon">
+          </div>
+        </div>
     </a>
 
   </div>
