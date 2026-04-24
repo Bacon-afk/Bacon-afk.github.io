@@ -24,27 +24,24 @@
 <style>
     /* Styling for the small GIF next to the text */
 .inline-gif {
-  /* Use a fixed height and width to force it small */
-  height: 16px !important; 
-  width: 16px !important;
+  /* 'em' makes the size relative to the text around it */
+  height: 0.8em !important; 
+  width: auto !important;
   
-  /* Ensure it doesn't stretch */
-  object-fit: contain; 
-  
-  /* Keeps it on the same line as the text */
   display: inline-block;
-  margin-left: 6px;
+  margin-left: 8px;
   vertical-align: middle;
   
-  /* Your lighting effects */
+  /* Keeps the 'light up' transition */
   filter: grayscale(30%) brightness(0.8);
-  transition: filter 0.4s ease, transform 0.4s ease;
+  transition: all 0.4s ease;
 }
 
-/* This ensures the title container doesn't force the GIF to be huge */
+/* Ensure the container doesn't crush it */
 .media-card-title {
   display: flex;
-  align-items: center; /* Centers the small GIF vertically with the text */
+  align-items: center;
+  line-height: 1;
 }
 /* When the WHOLE card is hovered, light up the GIF */
 .tf2-card:hover .inline-gif {
